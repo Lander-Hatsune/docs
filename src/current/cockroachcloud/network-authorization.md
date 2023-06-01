@@ -25,6 +25,7 @@ You can authorize network access to your cluster by:
     This option can also be helpful if you need more than the current maximum of 20 authorized networks per cluster.
 
 {{site.data.alerts.callout_info}}
+
 During [limited access](/docs/{{site.versions["stable"]}}/cockroachdb-feature-availability.html), neither Azure Private Link nor private clusters are available for {{ site.data.products.dedicated }} clusters on Azure. Refer to [{{ site.data.products.dedicated }} on Azure](cockroachdb-dedicated-on-azure.html).
 {{site.data.alerts.end}}
 
