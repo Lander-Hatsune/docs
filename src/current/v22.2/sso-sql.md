@@ -22,7 +22,7 @@ Currently, this flow will not work for service accounts provisioned in {{ site.d
 
 	You must have the ability to create identities and issue access tokens formatted using JSON Web Token (JWT).
 
-	This [Cockroach Labs blog post](https://www.cockroachlabs.com/blog/) covers and provides further resources for a variety of token-issuing use cases, including using Okta and Google Cloud Platform to issue tokens.
+	This [Cockroach Labs blog post](https://www.cockroachlabs.com/blog/sso-to-clusters-with-jwt/) covers and provides further resources for a variety of token-issuing use cases, including using Okta and Google Cloud Platform to issue tokens.
 
 - **CockroachDB:**
 
