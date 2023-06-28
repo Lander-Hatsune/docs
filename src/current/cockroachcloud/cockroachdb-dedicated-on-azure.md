@@ -20,11 +20,12 @@ During [limited access](/docs/{{site.versions["stable"]}}/cockroachdb-feature-av
 
 - Multi-region clusters are not yet available.
 - Single-region clusters can be created in the following regions: `eastus2` (US East Coast - Virginia) and `westeurope` (Netherlands)
+- After creation, a cluster's regions cannot currently be modified.
 
 ### Editing and scaling
 
 - A cluster must have at minimum three nodes. Single-node clusters are not supported.
-- After it is created, a cluster cannot yet be modified or scaled in place. Instead, create a new cluster with the desired configuration.
+- After it is created, a cluster's nodes cannot yet be modified or scaled in place. However, nodes can be [added or removed](cluster-management.html#add-or-remove-nodes-from-a-cluster).
 
 ### Disaster recovery
 
@@ -61,7 +62,7 @@ Not yet. During [limited access](/docs/{{site.versions["stable"]}}/cockroachdb-f
 
 ### Is it possible to horizontally scale a dedicated cluster on Azure?
 
-Not yet.
+After it is created, a cluster's nodes cannot yet be modified or scaled in place. However, nodes in existing regions can be [added or removed](cluster-management.html#add-or-remove-nodes-from-a-cluster).
 
 ### What Azure regions can we choose to create the dedicated clusters?
 
