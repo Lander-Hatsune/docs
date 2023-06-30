@@ -15,6 +15,9 @@ Only [{{ site.data.products.db }} Org Administrators](authorization.html#org-adm
 To create and connect to a 30-day free {{ site.data.products.dedicated }} cluster and run your first query, see the [Quickstart](quickstart-trial-cluster.html).
 {{site.data.alerts.end}}
 
+
+<!-- need to refer to restrict_egress_traffic  bool? it's a thingy you can do with API but not UI! Does this mean we should recommend peeps to use API? probably should ANYWAY -->
+
 ## Step 1. Start the cluster creation process
 
 1. If you haven't already, <a href="https://cockroachlabs.cloud/signup?referralId=docs_create_dedicated_cluster" rel="noopener" target="_blank">sign up for a {{ site.data.products.db }} account</a>.
