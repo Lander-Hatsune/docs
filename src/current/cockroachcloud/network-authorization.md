@@ -91,3 +91,36 @@ Self-service VPC peering setup is not supported for {{ site.data.products.dedica
 If your cloud provider is AWS, you can use [AWS PrivateLink](https://aws.amazon.com/privatelink/) to securely connect your AWS application with your {{ site.data.products.dedicated }} cluster using a private endpoint. Like VPC Peering, a PrivateLink connection will prevent your traffic from being exposed to the public internet and reduce network latency. 
 
 Refer to: [Managing AWS PrivateLink for a Dedicated Cluster](aws-privatelink.html).
+
+## DB Console
+
+The DB Console provides details about your cluster and database configuration, and helps you optimize cluster performance.
+
+For the functionality offered by the DB Console, refer to: [DB Console Overview](../{{site.versions["stable"]}}/ui-overview.html)
+
+
+To get the URL for your cluster's DB Console:
+
+1. Visit your Dedicated cluster's monitoring page:
+
+    `https://cockroachlabs.io/cluster/{ cluster ID }/monitoring`
+
+1. Clicking **Open DB Console**.
+
+    Your browser will attempt to access the DB console in a new tab, however it will be unable to read the data until you authorize your IP in the next step.
+    
+1. Visit your Dedicated cluster's IP allowlist configuration page:
+
+    `https://cockroachlabs.io/cluster/{ cluster ID }/networking/allowlist`
+
+1. Click **Add Network**.
+
+1. Add your **Current Network**:
+    1. Give it a **Name** indicating its use for DB Console access from your current location.
+    1. Select **DB Console to monitor the cluster** under **Allow this network to access**.
+    1. Click **Apply**.
+1. Refresh the browser window with the DB Console URL, and you should be able to access the console.
+
+{{site.data.alerts.callout_info}}
+If you perform DNS lookup on the URL for the DB Console, you will get three IP addresses. These IPs are static for the lifecycle of the cluster and can be targeted directly to bypass DNS.
+{{site.data.alerts.end}}
