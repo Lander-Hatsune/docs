@@ -1,16 +1,16 @@
 ---
-title: Payment Card Industry Data Security Standard (PCI DSS) Compliance in CockroachDB Dedicated advanced
-summary: Learn about compliance with the Payment Card Industry Data Security Standard (PCI DSS) for CockroachDB Dedicated advanced clusters.
+title: Payment Card Industry Data Security Standard (PCI DSS) Compliance in CockroachDB Dedicated
+summary: Learn about compliance with the Payment Card Industry Data Security Standard (PCI DSS) for CockroachDB Dedicated clusters.
 toc: true
 docs_area: manage.security
 ---
 
-{{ site.data.products.dedicated }} advanced has been certified by a PCI Qualified Security Assessor (QSA) as a PCI DSS [Level 1 Service Provider](https://www.pcidssguide.com/what-are-pci-service-provider-compliance-levels/). This certification extends the existing [SOC 2 Type 2 certification](https://www.cockroachlabs.com/blog/soc-2-compliance-2/) of {{ site.data.products.dedicated }}, which provides a baseline level of security controls to safeguard customer data.
+{{ site.data.products.dedicated }} has been certified by a PCI Qualified Security Assessor (QSA) as a PCI DSS [Level 1 Service Provider](https://www.pcidssguide.com/what-are-pci-service-provider-compliance-levels/). This certification extends the existing [SOC 2 Type 2 certification](https://www.cockroachlabs.com/blog/soc-2-compliance-2/) of {{ site.data.products.dedicated }}, which provides a baseline level of security controls to safeguard customer data.
 
 This page provides information about compliance with PCI DSS within {{ site.data.products.dedicated }} advanced, describes some of the ways that {{ site.data.products.db }} implements and enforces compliance, and illustrates some of the types of changes you may need to implement outside of your {{ site.data.products.dedicated }} clusters.
 
 {{site.data.alerts.callout_success}}
-When a {{ site.data.products.dedicated }} advanced cluster is configured appropriately for compliance with PCI DSS, the cluster also meets or exceeds the requirements of the Health Insurance Portability and Accountability Act of 1996, commonly referred to as _HIPAA_.
+When a {{ site.data.products.dedicated }} advanced cluster is configured appropriately for compliance with PCI DSS, the cluster also meets the requirements of the Health Insurance Portability and Accountability Act of 1996, commonly referred to as _HIPAA_.
 {{site.data.alerts.end}}
 
 During [limited access](/docs/{{site.versions["stable"]}}/cockroachdb-feature-availability.html), PCI DSS is not supported for {{ site.data.products.dedicated }} clusters on Azure. Refer to [{{ site.data.products.dedicated }} on Azure](cockroachdb-dedicated-on-azure.html).
@@ -85,7 +85,7 @@ When a system complies with PCI DSS, the system meets the goals of the standard 
 </tgroup>
 </table>
 
-{{ site.data.products.dedicated }} advanced has implemented the requirements outlined in [PCI DSS 3.2.1](https://listings.pcisecuritystandards.org/documents/SAQ_D_v3_Merchant.pdf) within the DBaaS platform. To take advantage of that compliance, you should take the actions outlined in [Responsibilities of the customer](#responsibilities-of-the-customer).
+{{ site.data.products.dedicated }} advanced has implemented the requirements outlined in [PCI DSS 3.2.1](https://listings.pcisecuritystandards.org/documents/SAQ_D_v3_Merchant.pdf) within the DBaaS platform. To take advantage of the implemented controls and procedures, you should take the actions outlined in [Responsibilities of the customer](#responsibilities-of-the-customer).
 
 ## Responsibilities of Cockroach Labs
 

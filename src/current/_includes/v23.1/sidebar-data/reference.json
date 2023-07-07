@@ -1333,7 +1333,7 @@
             "title": "Compliance",
             "items": [
               {
-                "title": "CockroachDB Dedicated Compliance Overview",
+                "title": "CockroachDB Cloud Compliance Overview",
                 "urls": [
                   "/cockroachcloud/compliance.html"
                 ]
