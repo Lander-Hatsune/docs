@@ -1,78 +1,29 @@
-### Create a Serverless cluster
+### API request
 
-<div class="filters clearfix">
-    <button class="filter-button page-level" data-scope="curl"><strong>curl</strong></button>
-    <button class="filter-button page-level" data-scope="raw"><strong>Raw</strong></button>
-</div>
+To create a **Serverless** cluster, send a `POST` request to the `/v1/clusters` endpoint, specifying the following parameters:
 
-<section class="filter-content" markdown="1" data-scope="curl">
+- `name`: your cluster's name, a short string with no whitespace.
+- `provider`: "GCP" or "AWS".
+- `primary_region`: (optional) Specify which region should be made the primary region. This is only applicable to multi-region Serverless clusters. This field is required if you create the cluster in more than one region.
+- `regions`: An array of strings specifying the cloud provider's zone codes. For example, for Oregon, set region_name to "us-west2" for GCP and "us-west-2" for AWS.
+- `usage_limits`:
+  - `request_unit_limit`: (int64) the maximum number of request units that the cluster can consume during the month. If this limit is exceeded, then the cluster is disabled until the limit is increased, or until the beginning of the next month when more free request units are granted. It is an error for this to be zero.
+  - `storage_mib_limit`: (int64) the maximum number of Mebibytes of storage that the cluster can have at any time during the month. If this limit is exceeded, then the cluster is throttled; only one SQL connection is allowed at a time, with the expectation that it is used to delete data to reduce storage usage. It is an error for this to be zero.
+- `spend_limit`: (integer) the maximum monthly charge for a cluster, in US cents. We recommend using `usage_limits` instead, since `spend_limit` will be deprecated in the future.
 
-#### Curl command
+[API reference](https://www.cockroachlabs.com/docs/api/cloud/v1.html#post-/api/v1/clusters)
 
 {% include_cached copy-clipboard.html %}
 ~~~ shell
 curl --request POST \
-  --url https://cockroachlabs.cloud/api/v1/clusters \
-  --header 'Authorization: Bearer {secret_key}' \
-  --data '{"name":"{cluster_name}","provider":"{cloud_provider}","spec":{"serverless":{"regions":["{region_name}"],"spendLimit":{spend_limit}}}}'
+--url 'https://management-staging.crdb.io/api/v1/clusters' \
+--header 'Authorization: Bearer { api key }' \
+--data @create-serverless-cluster-create.json
 ~~~
-
-</section>
-
-<section class="filter-content" markdown="1" data-scope="raw">
-
-#### JSON spec
 
 {% include_cached copy-clipboard.html %}
 ~~~ json
-{
-  "name": "{cluster_name}",
-  "provider": "{cloud_provider}",
-  "spec": {
-    "serverless": {
-      "regions": [
-        "{region_name}"
-      ],
-      "spendLimit": {spend_limit}
-    }
-  }
-}
-~~~
-
-</section>
-
-Where:
-
-  - `{cluster_name}` is the name of the cluster. This should be a short string with no whitespace.
-  - `{cloud_provider}` is the name of the cloud infrastructure provider on which you want your cluster to run. Possible values are: `GCP`, `AWS`, `AZURE` Support for Azure is in [limited access](/docs/{{site.versions["stable"]}}/cockroachdb-feature-availability.html), and Serverless clusters cannot be created on Azure. Refer to [{{ site.data.products.dedicated }} on Azure](cockroachdb-dedicated-on-azure.html).
-  - `{region_name}` is the zone code of the cloud infrastructure provider. For example, on GCP you can set the "us-west2" zone code.
-  - `{spend_limit}` is the [maximum amount of money, in US cents, you want to spend per month](plan-your-cluster.html) on this cluster.
-
-For example, to create a new free Serverless cluster named "notorious-moose" using the default values for the cloud infrastructure provider and region:
-
-<div class="filters clearfix">
-    <button class="filter-button page-level" data-scope="curl"><strong>curl</strong></button>
-    <button class="filter-button page-level" data-scope="raw"><strong>Raw</strong></button>
-</div>
-
-<section class="filter-content" markdown="1" data-scope="curl">
-
-#### Curl command
-
-{% include_cached copy-clipboard.html %}
-~~~ shell
-curl --request POST \
-  --url https://cockroachlabs.cloud/api/v1/clusters \
-  --header 'Authorization: Bearer {secret_key}' \
-  --data '{"name":"notorious-moose","provider":"GCP","spec":{"serverless":{"regions":["us-central1"],"spendLimit":0}}}'
-~~~
-
-</section>
-
-<section class="filter-content" markdown="1" data-scope="raw">
-
-{% include_cached copy-clipboard.html %}
-~~~ JSON
+#create-serverless-cluster-create.json
 {
   "name": "notorious-moose",
   "provider": "GCP",
@@ -81,48 +32,52 @@ curl --request POST \
       "regions": [
         "us-central1"
       ],
-      "spendLimit": 0
+      "usageLimits": 0
     }
   }
 }
 ~~~
 
-</section>
-
-
-#### Return payload
+### API response
 
 If the request was successful, the API will return information about the newly created cluster.
 
 {% include_cached copy-clipboard.html %}
 ~~~ json
 {
-  "cloud_provider": "{cloud_provider}",
-  "created_at": "2022-03-14T14:15:22Z",
-  "creator_id": "{account_id}",
-  "deleted_at": "2022-03-14T14:15:22Z",
-  "id": "{cluster_id}",
-  "operation_status": "CLUSTER_STATUS_UNSPECIFIED",
-  "name": "{cluster_name}",
+  "id": "89db0bae-89ca-4bb0-83d8-d1e922bcdede",
+  "name": "notorious-goose",
+  "cockroach_version": "v23.1.4",
+  "upgrade_status": "FINALIZED",
   "plan": "SERVERLESS",
-  "regions": [
-    {
-      "name": "{region_name}",
-      "sql_dns": "{server_host}",
-      "ui_dns": ""
-    }
-  ],
+  "cloud_provider": "GCP",
+  "account_id": "",
+  "state": "CREATED",
+  "creator_id": "b9ad8253-8c60-46fd-afc2-62fd39e7d2ed",
+  "operation_status": "UNSPECIFIED",
   "config": {
     "serverless": {
-      "regions": [
-        "{region_name}"
-      ],
       "spend_limit": 0,
-      "routing_id": "{routing_id}"
+      "routing_id": "notorious-goose-6132",
+      "usage_limits": null
     }
   },
-  "state": "CREATING",
-  "updated_at": "2022-03-14T14:15:22Z"
+  "regions": [
+    {
+      "name": "us-central1",
+      "sql_dns": "serverless-us-c-1.gcp-us-central1.crdb.io",
+      "ui_dns": "",
+      "internal_dns": "",
+      "node_count": 0,
+      "primary": true
+    }
+  ],
+  "created_at": "2023-07-07T01:46:46.862606Z",
+  "updated_at": "2023-07-07T01:46:48.901903Z",
+  "deleted_at": null,
+  "sql_dns": "notorious-goose-6132.6h5c.crdb.io",
+  "network_visibility": "PUBLIC",
+  "egress_traffic_policy": "UNSPECIFIED"
 }
 ~~~
 

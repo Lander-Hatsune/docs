@@ -78,7 +78,8 @@ Where `{secret_key}` is the [secret key string you stored when you created the A
 
 ## Create a new cluster
 
-**Required Permissions**:
+### Required Permissions
+
 The service account associated with the secret key must have one of the following [organization roles](authorization.html#organization-user-roles), in order to create a cluster in that organization:
 
 - the [Cluster Creator role](authorization.html#cluster-creator).
